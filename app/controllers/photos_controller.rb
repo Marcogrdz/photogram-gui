@@ -7,10 +7,21 @@ class PhotosController <ApplicationController
   end
 
   def show
-  url_username =params.fetch("path_username")
-  matching_username = User.where ({ :username=> url_username})
+  url_photo =params.fetch("path_id")
+  matching_photo = Photo.where ({ :id=> url_photo})
 
-  @the_user= matching_username.at(0)
-  render ({ :template => "user_templates/show"})
+  @the_photo= matching_photo.at(0)
+  render ({ :template => "photo_templates/show"})
   end
+
+  def baii
+    the_id =params.fetch("path_id")
+    matching_photo = Photo.where ({ :id=> the_id})
+  
+    the_photo= matching_photo.at(0)
+
+    the_photo.destroy
+    
+    render ({ :template => "photo_templates/baii"})
+    end
 end
